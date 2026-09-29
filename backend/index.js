@@ -17,6 +17,15 @@ if (ML_URL && !ML_URL.startsWith('http://') && !ML_URL.startsWith('https://')) {
 app.use(cors());
 app.use(express.json());
 
+app.get(['/', '/health'], (req, res) => {
+  res.status(200).json({
+    status: 'ok',
+    service: 'Golden Hour Emergency Network API',
+    uptime: Math.round(process.uptime()),
+    timestamp: new Date().toISOString()
+  });
+});
+
 const sseClients = new Set();
 
 function broadcastEvent(type, payload = {}) {
@@ -651,6 +660,6 @@ app.get('/api/ml-metrics', async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`Backend service running on http://localhost:${PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Golden Hour Backend running on 0.0.0.0:${PORT}`);
 });
