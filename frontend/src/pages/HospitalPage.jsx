@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { apiUrl } from '../apiConfig';
 
 function BedBar({ available, total, color }) {
   const pct = total > 0 ? (available / total) * 100 : 0;
@@ -239,7 +240,7 @@ export default function HospitalPage({ hospitals, requests, onBack, onRefresh, s
 
   const handleAccept = async (reqId) => {
     try {
-      await fetch(`/api/requests/${reqId}/respond`, {
+      await fetch(apiUrl(`/api/requests/${reqId}/respond`), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ action: 'ACCEPT' })
@@ -253,7 +254,7 @@ export default function HospitalPage({ hospitals, requests, onBack, onRefresh, s
 
   const handleReject = async (reqId, reason) => {
     try {
-      await fetch(`/api/requests/${reqId}/respond`, {
+      await fetch(apiUrl(`/api/requests/${reqId}/respond`), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ action: 'REJECT', reason })
@@ -266,7 +267,7 @@ export default function HospitalPage({ hospitals, requests, onBack, onRefresh, s
 
   const handleAdvanceStatus = async (reqId, status) => {
     try {
-      await fetch(`/api/requests/${reqId}/handoff`, {
+      await fetch(apiUrl(`/api/requests/${reqId}/handoff`), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status })
@@ -280,7 +281,7 @@ export default function HospitalPage({ hospitals, requests, onBack, onRefresh, s
   const refreshTelemetry = async () => {
     if (!hospital.id) return;
     try {
-      await fetch(`/api/hospitals/${hospital.id}/refresh-telemetry`, { method: 'POST' });
+      await fetch(apiUrl(`/api/hospitals/${hospital.id}/refresh-telemetry`), { method: 'POST' });
       onRefresh();
     } catch (e) {
       console.error(e);
@@ -294,7 +295,7 @@ export default function HospitalPage({ hospitals, requests, onBack, onRefresh, s
     if (field === 'icu') payload.icuBedsAvailable = Math.max(0, Math.min(hospital.icuBedsTotal, hospital.icuBedsAvailable + delta));
     if (field === 'gen') payload.generalBedsAvailable = Math.max(0, Math.min(hospital.generalBedsTotal, hospital.generalBedsAvailable + delta));
     try {
-      await fetch(`/api/hospitals/${hospital.id}/capacity`, {
+      await fetch(apiUrl(`/api/hospitals/${hospital.id}/capacity`), {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)

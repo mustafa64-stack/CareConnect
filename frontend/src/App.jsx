@@ -3,6 +3,7 @@ import AppHeader from './components/AppHeader';
 import LandingPage from './pages/LandingPage';
 import DispatcherPage from './pages/DispatcherPage';
 import HospitalPage from './pages/HospitalPage';
+import { apiUrl } from './apiConfig';
 
 export default function App() {
   const [page, setPage] = useState('landing');
@@ -13,8 +14,8 @@ export default function App() {
   const fetchData = useCallback(async () => {
     try {
       const [hRes, rRes] = await Promise.all([
-        fetch('/api/hospitals'),
-        fetch('/api/requests'),
+        fetch(apiUrl('/api/hospitals')),
+        fetch(apiUrl('/api/requests')),
       ]);
       if (hRes.ok) setHospitals(await hRes.json());
       if (rRes.ok) setRequests(await rRes.json());
@@ -28,7 +29,7 @@ export default function App() {
 
     let eventSource = null;
     try {
-      eventSource = new EventSource('/api/events');
+      eventSource = new EventSource(apiUrl('/api/events'));
       eventSource.onopen = () => setSseConnected(true);
       eventSource.onmessage = () => fetchData();
       eventSource.onerror = () => setSseConnected(false);

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { BrainCircuit, TrendingUp, Target, Zap, BarChart3, ChevronRight, Info } from 'lucide-react';
+import { apiUrl } from '../apiConfig';
 
 const FEATURE_META = {
   specialty_match: { label: 'Specialty Match', color: '#4C8DFF', desc: 'Clinical specialty relevance to emergency type' },
@@ -57,7 +58,7 @@ export default function MLMetricsPanel({ onClose }) {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    fetch('/api/ml-metrics')
+    fetch(apiUrl('/api/ml-metrics'))
       .then(r => r.json())
       .then(data => {
         setMetrics(data);

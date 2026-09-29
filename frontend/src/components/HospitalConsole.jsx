@@ -13,6 +13,7 @@ import {
   Minus,
   Plus
 } from 'lucide-react';
+import { apiUrl } from '../apiConfig';
 
 export default function HospitalConsole({
   hospitals = [],
@@ -52,7 +53,7 @@ export default function HospitalConsole({
     }
 
     try {
-      await fetch(`/api/hospitals/${currentHospital.id}/capacity`, {
+      await fetch(apiUrl(`/api/hospitals/${currentHospital.id}/capacity`), {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updatedData)
@@ -69,7 +70,7 @@ export default function HospitalConsole({
   const handleSimulateStale = async () => {
     if (!currentHospital.id) return;
     try {
-      await fetch(`/api/hospitals/${currentHospital.id}/simulate-stale`, { method: 'POST' });
+      await fetch(apiUrl(`/api/hospitals/${currentHospital.id}/simulate-stale`), { method: 'POST' });
       onRefreshData();
     } catch (err) {
       console.error('Error simulating stale telemetry:', err);
@@ -80,7 +81,7 @@ export default function HospitalConsole({
   const handleRefreshTelemetry = async () => {
     if (!currentHospital.id) return;
     try {
-      await fetch(`/api/hospitals/${currentHospital.id}/refresh-telemetry`, { method: 'POST' });
+      await fetch(apiUrl(`/api/hospitals/${currentHospital.id}/refresh-telemetry`), { method: 'POST' });
       onRefreshData();
     } catch (err) {
       console.error('Error refreshing telemetry:', err);
@@ -90,7 +91,7 @@ export default function HospitalConsole({
   // Handle Accept Request (Atomic Lock)
   const handleAcceptRequest = async (requestId) => {
     try {
-      const res = await fetch(`/api/requests/${requestId}/respond`, {
+      const res = await fetch(apiUrl(`/api/requests/${requestId}/respond`), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ action: 'ACCEPT' })
@@ -105,7 +106,7 @@ export default function HospitalConsole({
   // Handle Reject Request
   const handleRejectRequest = async (requestId) => {
     try {
-      await fetch(`/api/requests/${requestId}/respond`, {
+      await fetch(apiUrl(`/api/requests/${requestId}/respond`), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ action: 'REJECT', reason: rejectReason })

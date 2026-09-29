@@ -15,6 +15,7 @@ import {
   Navigation,
   Timer
 } from 'lucide-react';
+import { apiUrl } from '../apiConfig';
 
 // Animated progress bar — transitions from 0 to target width on mount
 function AnimatedScoreBar({ value, color, delay = 0 }) {
@@ -107,7 +108,7 @@ export default function DispatcherConsole({
     async function fetchRankings() {
       setIsRanking(true);
       try {
-        const res = await fetch('/api/rank', {
+        const res = await fetch(apiUrl('/api/rank'), {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(formData)
@@ -152,7 +153,7 @@ export default function DispatcherConsole({
       const rankedItem = rankedResults.find(r => r.hospital.id === hospital.id);
 
       // Create or dispatch emergency request
-      const createRes = await fetch('/api/requests', {
+      const createRes = await fetch(apiUrl('/api/requests'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import SimpleMap from '../components/SimpleMap';
+import { apiUrl } from '../apiConfig';
 
 const EMERGENCY_TYPES = [
   'Heart attack',
@@ -239,7 +240,7 @@ export default function DispatcherPage({ hospitals, requests, onBack, onRefresh,
   const fetchRankingsForData = async (formData = form) => {
     setLoading(true);
     try {
-      const res = await fetch('/api/rank', {
+      const res = await fetch(apiUrl('/api/rank'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...formData, requiredResourceType: 'ICU Bed' }),
@@ -260,7 +261,7 @@ export default function DispatcherPage({ hospitals, requests, onBack, onRefresh,
 
   const handleSendRequest = async (hospital) => {
     try {
-      const res = await fetch('/api/requests', {
+      const res = await fetch(apiUrl('/api/requests'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
