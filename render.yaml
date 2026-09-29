@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: careconnect-backend
+    runtime: node
+    rootDir: backend
+    plan: free
+    buildCommand: npm install && npx prisma db push && node prisma/seed.js
+    startCommand: node index.js
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: ML_SERVICE_URL
+        fromService:
+          type: web
+          name: careconnect-ml
+          property: host
+
+  - type: web
+    name: careconnect-ml
+    runtime: python
+    rootDir: ml-service
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn -w 2 -b 0.0.0.0:$PORT server:app
+    envVars:
+      - key: PORT
+        value: 10000

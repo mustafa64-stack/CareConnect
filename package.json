@@ -1,0 +1,19 @@
+{
+  "name": "careconnect",
+  "version": "1.0.0",
+  "private": true,
+  "description": "CareConnect — Real-Time Emergency Patient Routing & Hospital Capacity Platform",
+  "scripts": {
+    "dev": "./start.sh",
+    "start": "./start.sh",
+    "stop": "./stop.sh",
+    "ml": "cd ml-service && ./venv/bin/python server.py",
+    "backend": "cd backend && node index.js",
+    "frontend": "cd frontend && npm run dev",
+    "build": "cd frontend && npm run build",
+    "tunnel": "cloudflared tunnel --url http://localhost:5173"
+  },
+  "keywords": [],
+  "author": "#include<tech_squad>",
+  "license": "ISC"
+}

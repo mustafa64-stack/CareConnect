@@ -1,0 +1,39 @@
+{
+  "accuracy": 0.932,
+  "roc_auc": 0.8154,
+  "f1_score": 0.9639,
+  "precision": 0.9439,
+  "recall": 0.9848,
+  "brier_score": 0.0529,
+  "cv_accuracy_mean": 0.9363,
+  "cv_accuracy_std": 0.0084,
+  "cv_roc_mean": 0.8156,
+  "confusion_matrix": {
+    "true_positives": 908,
+    "false_positives": 54,
+    "true_negatives": 24,
+    "false_negatives": 14
+  },
+  "feature_importances": {
+    "resource_match": 0.474,
+    "freshness_decay": 0.196,
+    "hospital_load_ratio": 0.1015,
+    "distance_km": 0.1007,
+    "specialty_match": 0.0593,
+    "o2_supply_ratio": 0.0453,
+    "urgency_weight": 0.0142,
+    "blood_bank_status": 0.009
+  },
+  "samples_trained": 4000,
+  "samples_tested": 1000,
+  "lr_coefficients": {
+    "distance_km": -0.0518,
+    "resource_match": 3.4242,
+    "specialty_match": 0.9902,
+    "freshness_decay": 1.8368,
+    "hospital_load_ratio": -0.9932,
+    "o2_supply_ratio": -0.3843,
+    "blood_bank_status": -0.05,
+    "urgency_weight": 0.4949
+  }
+}

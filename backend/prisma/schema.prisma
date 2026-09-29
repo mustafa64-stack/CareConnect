@@ -1,0 +1,63 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Hospital {
+  id                    String             @id
+  name                  String
+  code                  String             @unique
+  address               String
+  latitude              Float
+  longitude             Float
+  generalBedsTotal      Int                @default(50)
+  generalBedsAvailable  Int                @default(12)
+  icuBedsTotal          Int                @default(15)
+  icuBedsAvailable      Int                @default(3)
+  specialties           String             // JSON string array e.g. ["Cardiology", "Trauma"]
+  bloodBankStatus       String             @default("Optimal") // Optimal, Moderate, Critical, Depleted
+  o2SupplyPercent       Int                @default(95)
+  traumaLevel           Int                @default(1)
+  lastUpdated           DateTime           @default(now())
+  createdAt             DateTime           @default(now())
+  updatedAt             DateTime           @updatedAt
+  requests              EmergencyRequest[]
+}
+
+model EmergencyRequest {
+  id                    String             @id @default(uuid())
+  incidentNumber        String             @unique
+  callerName            String             @default("Ambulance Unit 104")
+  patientAge            Int                @default(45)
+  patientGender         String             @default("Male")
+  emergencyType         String             // e.g. "Cardiac Arrest", "Severe Trauma"
+  urgencyLevel          String             @default("Immediate") // Immediate, Very Urgent, Urgent
+  requiredResourceType  String             @default("ICU Bed") // ICU Bed, General Bed, Trauma Bay
+  requiresBlood         Boolean            @default(false)
+  bloodTypeNeeded       String?
+  latitude              Float
+  longitude             Float
+  assignedHospitalId    String?
+  assignedHospital      Hospital?          @relation(fields: [assignedHospitalId], references: [id])
+  status                String             @default("PENDING") // PENDING, ACCEPTED, REJECTED, EN_ROUTE, ARRIVED, HANDED_OVER, CONFLICT_FAILED
+  bedReserved           Boolean            @default(false)
+  rejectionReason       String?
+  scoreSnapshot         String?            // JSON string with ranking scores at time of request
+  handoffNotes          String?
+  createdAt             DateTime           @default(now())
+  updatedAt             DateTime           @updatedAt
+}
+
+model AuditLog {
+  id                    String             @id @default(uuid())
+  timestamp             DateTime           @default(now())
+  eventType             String             // e.g. DISPATCH_SENT, REQUEST_ACCEPTED, DOUBLE_BOOKING_COLLISION
+  hospitalId            String?
+  requestId             String?
+  incidentNumber        String?
+  details               String
+}
