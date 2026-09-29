@@ -9,7 +9,10 @@ const { INITIAL_HOSPITALS, seed } = require('./prisma/seed');
 const app = express();
 const prisma = new PrismaClient();
 const PORT = process.env.PORT || 5000;
-const ML_URL = process.env.ML_SERVICE_URL || 'http://localhost:5001';
+let ML_URL = process.env.ML_SERVICE_URL || 'http://localhost:5001';
+if (ML_URL && !ML_URL.startsWith('http://') && !ML_URL.startsWith('https://')) {
+  ML_URL = `http://${ML_URL}`;
+}
 
 app.use(cors());
 app.use(express.json());
