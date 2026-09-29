@@ -4,7 +4,7 @@ set -e
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 cd "$DIR"
 
-echo "Launching CareConnect Emergency Allocation Services..."
+echo "Launching Golden Hour Emergency Allocation Services..."
 
 "$DIR/ml-service/venv/bin/python" "$DIR/ml-service/server.py" &
 ML_PID=$!
