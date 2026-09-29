@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: careconnect-backend
+    name: goldenhour-backend
     runtime: node
     rootDir: backend
     plan: free
@@ -12,11 +12,11 @@ services:
       - key: ML_SERVICE_URL
         fromService:
           type: web
-          name: careconnect-ml
+          name: goldenhour-ml
           property: host
 
   - type: web
-    name: careconnect-ml
+    name: goldenhour-ml
     runtime: python
     rootDir: ml-service
     plan: free

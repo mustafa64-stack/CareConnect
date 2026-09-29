@@ -1,10 +1,10 @@
-# CareConnect
+# Golden Hour
 
 **Team: `#include<tech_squad>`**
 
-> Real-time emergency patient routing and hospital capacity coordination platform.
+> Real-time emergency patient routing and critical care capacity allocation when every second counts.
 
-CareConnect connects field emergency units and regional emergency departments in real time. It evaluates live capacity, clinical specialties, transit delay, and telemetry freshness to route patients to the most appropriate available care facility.
+**Golden Hour** is an intelligent emergency healthcare coordination platform designed around the clinical *Golden Hour*—the critical first 60 minutes where rapid triage and definitive hospital care saves lives. It synchronizes ambulance dispatchers, field emergency units, and hospital trauma centers in real time, evaluating live bed availability, clinical specialty match, transit bottlenecks, and telemetry freshness.
 
 ---
 

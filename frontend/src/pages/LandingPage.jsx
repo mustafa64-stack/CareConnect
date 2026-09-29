@@ -16,8 +16,11 @@ export default function LandingPage({ onSelect }) {
           <AppLogo size={64} showLabel={false} />
         </div>
         <h1 className="brand-font" style={{ fontSize: 32, fontWeight: 800, color: 'var(--text)', marginBottom: 8, letterSpacing: '-0.02em' }}>
-          CareConnect Operations
+          Golden Hour Operations
         </h1>
+        <p style={{ color: 'var(--text-muted)', fontSize: 14, maxWidth: 440, lineHeight: 1.5, margin: '0 auto' }}>
+          Real-time patient routing and critical care capacity coordination when every second counts.
+        </p>
       </div>
 
       <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap', justifyContent: 'center', position: 'relative', zIndex: 10, maxWidth: 640, width: '100%' }}>

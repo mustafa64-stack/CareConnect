@@ -1,8 +1,8 @@
 {
-  "name": "careconnect",
+  "name": "golden-hour",
   "version": "1.0.0",
   "private": true,
-  "description": "CareConnect — Real-Time Emergency Patient Routing & Hospital Capacity Platform",
+  "description": "Golden Hour — Real-Time Emergency Patient Routing & Hospital Capacity Platform",
   "scripts": {
     "dev": "./start.sh",
     "start": "./start.sh",

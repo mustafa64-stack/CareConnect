@@ -8,7 +8,7 @@ import {
 const STEPS = [
   {
     id: 'welcome',
-    title: 'CareConnect Emergency Operations',
+    title: 'Golden Hour Emergency Operations',
     subtitle: 'Developed by #include<tech_squad>',
     description: 'A real-time mission-control console connecting ambulance dispatchers to regional hospitals for critical emergency patient routing. This 3-minute walkthrough covers all evaluation scenarios.',
     icon: Ambulance,
